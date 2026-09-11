@@ -1,6 +1,6 @@
  import { useState, useEffect } from "react";
 
-const API_URL = "http://localhost:5000/api/contect";
+const API_URL = "https://learnhub-kt52.vercel.app/api/contect";
 
 const initialForm = {
   name: "",
