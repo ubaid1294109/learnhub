@@ -32,7 +32,6 @@ mongoose
 
 module.exports = app;
 
-// Local development
 if (require.main === module) {
   const PORT = process.env.PORT || 5000;
 
