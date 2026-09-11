@@ -1,33 +1,45 @@
- require("dotenv").config();
- const express = require("express");
- const mongoose =require("mongoose");
- const cors = require("cors");
+require("dotenv").config();
 
- const studentRoutes = require("./routes/studentRoutes");
- const courseRoutes = require("./routes/courseRoutes");
- const contectRoutes = require("./routes/contectRoutes");
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
- const app = express();
+const studentRoutes = require("./routes/studentRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+const contectRoutes = require("./routes/contectRoutes");
 
- app.use(cors());
- app.use(express.json());
+const app = express();
 
- app.use("/api/students", studentRoutes);
- app.use("/api/course", courseRoutes);
- app.use("/api/contect", contectRoutes);
+app.use(cors());
+app.use(express.json());
 
- app.get("/",(req,res)=>{
-    res.send("learnHub API is running");
- });
- const PORT = process.env.PORT || 5000;
+app.use("/api/students", studentRoutes);
+app.use("/api/course", courseRoutes);
+app.use("/api/contect", contectRoutes);
 
- mongoose.connect(process.env.MONGO_URI)
- .then(()=>{console.log("MongoDB connected");
+app.get("/", (req, res) => {
+  res.send("LearnHub API is running");
+});
 
- app.listen(PORT, () =>console.log(`server running on http://localhost:${PORT}` ))
- })
- .catch((err)=>console.error("MongoDB.connection error:", err.message));
+const MONGO_URI = process.env.MONGO_URI;
 
-//ubaidrazashaikh88_db_user
-// mongodb+srv://ubaidrazashaikh88_db_user:IxKro79l9bGkI4vu@cluster0.os8y7s4.mongodb.net/
-//IxKro79l9bGkI4vu
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err.message);
+  });
+
+// Important for Vercel
+module.exports = app;
+
+// Local development
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
