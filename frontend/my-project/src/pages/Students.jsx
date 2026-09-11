@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import StudentCard from "../Components/StudentCard"
+import StudentCard from "../components/StudentCard"
 
 const API_URL = 'http://localhost:5000/api/students';
 
